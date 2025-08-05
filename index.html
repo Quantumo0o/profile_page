@@ -80,16 +80,16 @@
     <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-40 border-b border-slate-200">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-slate-800">Shubham Verma</a>
+            <span class="text-xl font-bold text-slate-800">Shubham Verma</span>
             <div class="hidden md:flex space-x-8">
                 <a href="#skills" class="text-slate-600 hover:text-indigo-600 transition">Skills</a>
                 <a href="#experience" class="text-slate-600 hover:text-indigo-600 transition">Experience</a>
                 <a href="#projects" class="text-slate-600 hover:text-indigo-600 transition">Projects</a>
                 <a href="#contact" class="text-slate-600 hover:text-indigo-600 transition">Contact</a>
             </div>
-            <a href="mailto:shubhamvermamail@gmail.com" class="hidden md:block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+            <button id="get-in-touch-btn" class="hidden md:block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
                 Get in Touch
-            </a>
+            </button>
             <button id="mobile-menu-button" class="md:hidden text-slate-800">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
@@ -161,10 +161,9 @@
         <section id="contact" class="pt-24 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Let's Connect</h2>
             <p class="text-lg text-slate-600 mt-2 mb-8">I'm open to new opportunities and collaborations.</p>
-            <a href="mailto:shubhamvermamail@gmail.com" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition inline-block">
+            <button id="email-me-btn" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition inline-block">
                 Email Me
-            </a>
-            <p class="text-slate-500 mt-4">7011989542 ● New Kondli, Delhi 110096</p>
+            </button>
         </section>
 
     </main>
@@ -175,7 +174,7 @@
             <div class="p-6 md:p-8">
                 <div class="flex justify-between items-start">
                     <h3 id="modal-title" class="text-2xl font-bold text-slate-900"></h3>
-                    <button id="modal-close" class="text-slate-500 hover:text-slate-800">&times;</button>
+                    <button id="modal-close" class="text-slate-500 hover:text-slate-800 text-3xl leading-none">&times;</button>
                 </div>
                 <div id="modal-tags" class="flex flex-wrap gap-2 my-4"></div>
                 <div id="modal-description" class="text-slate-600 space-y-4"></div>
@@ -423,6 +422,32 @@
                     modal.classList.remove('flex');
                 }, 300);
             }
+
+            // Email copy functionality
+            const getInTouchBtn = document.getElementById('get-in-touch-btn');
+            const emailMeBtn = document.getElementById('email-me-btn');
+            const email = 'shubhamvermamail@gmail.com';
+
+            const copyEmail = (button) => {
+                const originalText = button.textContent;
+                const tempInput = document.createElement('textarea');
+                tempInput.value = email;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                button.textContent = 'Copied!';
+                button.disabled = true;
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 2000);
+            };
+
+            getInTouchBtn.addEventListener('click', () => copyEmail(getInTouchBtn));
+            emailMeBtn.addEventListener('click', () => copyEmail(emailMeBtn));
         });
     </script>
 </body>
